@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'treeherder.autoclassify',
     'treeherder.seta',
     'treeherder.intermittents_commenter',
+    'treeherder.changelog',
 ]
 if DEBUG:
     INSTALLED_APPS.append('django_extensions')
