@@ -1394,3 +1394,16 @@ class TextLogErrorMatch(models.Model):
     def __str__(self):
         return "{0} {1}".format(
             self.text_log_error.id, self.classified_failure.id)
+
+
+class PushActivity(models.Model):
+    """
+    Keep track of events in Treeherder.  This can be used for an event with
+    """
+    id = models.BigAutoField(primary_key=True)
+    push = models.ForeignKey(Push, on_delete=models.CASCADE)
+    time = models.DateTimeField(db_index=True)
+    automated = models.BooleanField(default=False)
+    count = models.SmallIntegerField()
+    summary = models.CharField(max_length=40)
+    description = models.TextField(max_length=256)
