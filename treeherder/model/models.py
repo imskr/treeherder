@@ -1403,7 +1403,11 @@ class PushActivity(models.Model):
     id = models.BigAutoField(primary_key=True)
     push = models.ForeignKey(Push, on_delete=models.CASCADE)
     time = models.DateTimeField(db_index=True)
+    # Whether this entry was done by automated process, or by some user interaction
     automated = models.BooleanField(default=False)
-    count = models.SmallIntegerField()
-    summary = models.CharField(max_length=40)
-    description = models.TextField(max_length=256)
+    # This could be an enum.  Examples: 'needInvestigation', 'fixedByCommit'
+    type = models.CharField(max_length=20)
+    # Any number to keep track of
+    count = models.IntegerField()
+    summary = models.CharField(max_length=120)
+    message = models.TextField(blank=True)
